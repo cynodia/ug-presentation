@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "type": "commonjs",
   "scripts": {
-    "dev": "nodemon src/index.js",
+    "dev": "prisma db push && nodemon src/index.js",
     "start": "node src/index.js",
     "db:push": "prisma db push",
     "db:generate": "prisma generate",
