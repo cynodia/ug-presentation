@@ -13,7 +13,7 @@
       group="issues"
       item-key="id"
       class="issue-list"
-      @end="onDragEnd"
+      @change="onChange"
       :animation="200"
     >
       <template #item="{ element }">
@@ -42,7 +42,7 @@ const emit = defineEmits(['add-issue', 'edit-issue', 'close-issue', 'reorder'])
 const localIssues = ref([...props.issues])
 watch(() => props.issues, (val) => { localIssues.value = [...val] }, { deep: true })
 
-function onDragEnd() {
+function onChange() {
   emit('reorder', {
     stateId: props.state.id,
     issues: localIssues.value.map((issue, index) => ({
