@@ -19,7 +19,7 @@ router.post('/:projectId/issues', requireAuth, async (req, res) => {
   if (!name || !stateId) return res.status(400).json({ error: 'Name and stateId required' });
   try {
     const issue = await req.prisma.issue.create({
-      data: { name, type: type || 'task', storyPoints: storyPoints ? parseInt(storyPoints) : null, order: order || 0, stateId, projectId: req.params.projectId },
+      data: { name, type: type || 'task', storyPoints: storyPoints ? parseInt(storyPoints) : null, order: order !== undefined ? order : 0, stateId, projectId: req.params.projectId },
       include: { state: true }
     });
     res.status(201).json(issue);

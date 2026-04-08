@@ -39,9 +39,13 @@ router.put('/:projectId/states/reorder', requireAuth, async (req, res) => {
 router.put('/:projectId/states/:id', requireAuth, async (req, res) => {
   const { name, color, order } = req.body;
   try {
+    const data = {};
+    if (name !== undefined) data.name = name;
+    if (color !== undefined) data.color = color;
+    if (order !== undefined) data.order = order;
     const state = await req.prisma.state.update({
       where: { id: req.params.id },
-      data: { name, color, order }
+      data
     });
     res.json(state);
   } catch (e) {
