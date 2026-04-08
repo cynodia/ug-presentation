@@ -17,7 +17,7 @@
           {{ loading ? 'Signing in...' : 'Sign In' }}
         </button>
       </form>
-      <div class="demo-creds">
+      <div v-if="isDev" class="demo-creds">
         <p><strong>Demo credentials:</strong></p>
         <p>superadmin / superadmin123</p>
         <p>admin / admin123 | alice / alice123 | bob / bob123</p>
@@ -35,6 +35,8 @@ import { useProjectStore } from '../stores/project'
 const router = useRouter()
 const auth = useAuthStore()
 const projectStore = useProjectStore()
+
+const isDev = import.meta.env.DEV
 
 const form = ref({ username: '', password: '' })
 const error = ref('')
